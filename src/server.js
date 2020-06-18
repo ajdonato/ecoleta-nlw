@@ -67,7 +67,7 @@ function afterInsertData(err) {
     console.log("Cadastrado com sucesso")
     console.log(this)
 
-    return res.render("create-point.html, {saved: true}")
+    return res.render("create-point.html", {saved: true})
 }
     db.run(query, values, afterInsertData)
 })
@@ -75,8 +75,17 @@ function afterInsertData(err) {
 
 server.get("/search", (req, res) => {
 
+    const search = req.query.search
+
+    if(search == "") {
+        //pesquisa vazia
+        return res.render("search-results.html", {total: 0})
+    }
+
+
+
     //3 pegar os dados do banco de dados
-    db.all(`SELECT * FROM places`, function(err, rows) {
+    db.all(`SELECT * FROM places WHERE city LIKE '%${search}%'`, function(err, rows) {
         if(err) {
             console.log(err)
             return res.send("Erro no cadastro")

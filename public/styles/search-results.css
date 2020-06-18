@@ -1,3 +1,14 @@
+body {
+    content: "";
+    position: absolute;
+    background: #f0f0f5;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 16rem;
+    z-index: -1;
+}
 body::after {
     content: "";
     position: fixed;
