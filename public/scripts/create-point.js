@@ -58,17 +58,25 @@ function getCities(event){
 
 function handleSelectedItem(event) {
     const itemLi = event.target
-       
+   
+    //adicionar ou remover uma classe com JS
     itemLi.classList.toggle("selected")
 
     const itemId = itemLi.dataset.id
 
+    console.log('ITEM ID', itemId)
+
+    //verificar se existem items selecionados, se sim
+    //pegar os items selecionados
     const alreadySelected = selectedItems.findIndex( item => {
         const itemFound = item == itemId
         return itemFound
     })
 
+
+    //se já estiver selecionado,
     if(alreadySelected >= 0) {
+        // tirar seleção
         const filteredItems = selectedItems.filter( item => {
             const itemIsDifferent = item != itemId
             return itemIsDifferent
@@ -80,6 +88,8 @@ function handleSelectedItem(event) {
     } else {
         selectedItems.push(itemId)
     }
+
+    console.log('selectedItems', selectedItems)
 
     collectedItems.value = selectedItems
 }
